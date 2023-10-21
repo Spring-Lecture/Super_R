@@ -36,7 +36,7 @@ jib {
         image = 'openjdk:17-oracle'
     }
     to {
-        image = "174170816230.dkr.ecr.ap-northeast-2.amazonaws.com/team13"
+        image = "174170816230.dkr.ecr.ap-northeast-2.amazonaws.com/team13/bliz"
         tags = ['latest']
     }
     container {
@@ -52,4 +52,4 @@ tasks.named('test') {
 jar {
     enabled = false
 }
-//latest 테스트
+//latest 테스/
