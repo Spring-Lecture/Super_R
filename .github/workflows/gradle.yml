@@ -45,5 +45,5 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and Push Docker image with Jib
-      run: ./gradlew jib
+      run: ./gradlew jibDockerBuild
 
