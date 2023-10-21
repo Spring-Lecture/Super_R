@@ -18,4 +18,9 @@ public class StringController {
         return hello;
     }
 
+    @GetMapping("/api/hello")
+    public String getHello2() {
+        return hello+22;
+    }
+
 }
