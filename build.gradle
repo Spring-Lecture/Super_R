@@ -35,7 +35,7 @@ jib {
         image = 'openjdk:17-oracle'
     }
     to {
-        image = "beomjun2218/my-app"
+        image = "${dockerAccount}/my-app"
         tags = ['latest']
     }
     container {
