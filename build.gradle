@@ -31,17 +31,19 @@ dependencies {
 }
 
 jib {
+    // def dockerAccount = System.getenv("dockerAccount")
     from {
         image = 'openjdk:17-oracle'
     }
     to {
-        image = "${dockerAccount}/my-app"
+        image = "${findProperty("dockerAccount")}" + "/my-app"
         tags = ['latest']
     }
     container {
         jvmFlags = ['-Xms512m', '-Xmx512m', '-Dspring.profiles.active=dev']
     }
 }
+
 
 tasks.named('test') {
     useJUnitPlatform()
