@@ -36,7 +36,7 @@ jib {
         image = 'openjdk:17-oracle'
     }
     to {
-        image = "${findProperty("dockerAccount")}" + "/my-app"
+        image = "174170816230.dkr.ecr.ap-northeast-2.amazonaws.com/team13"
         tags = ['latest']
     }
     container {
@@ -47,4 +47,8 @@ jib {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+jar {
+    enabled = false
 }
