@@ -54,4 +54,10 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_PRIVATE_ACCESS_KEY }}
         aws-region: ap-northeast-2
 
+    - name: Code Deploy To EC2 instance
+      run: |
+        aws deploy create-deployment \
+          --application-name team13-j \
+          --deployment-config-name CodeDeployDefault.AllAtOnce \
+          --deployment-group-name team13-j
 
