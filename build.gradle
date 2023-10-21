@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.5'
     id 'io.spring.dependency-management' version '1.1.3'
+    id 'com.google.cloud.tools.jib' version '3.4.0'
 }
 
 group = 'dev'
@@ -27,6 +28,19 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+jib {
+    from {
+        image = 'openjdk:17-oracle'
+    }
+    to {
+        image = "beomjun2218/my-app"
+        tags = ['latest']
+    }
+    container {
+        jvmFlags = ['-Xms512m', '-Xmx512m', '-Dspring.profiles.active=dev']
+    }
 }
 
 tasks.named('test') {
