@@ -52,5 +52,5 @@ jobs:
         aws-region: ap-northeast-2
 
     - name: Build and Push Docker image with Jib
-      run: ./gradlew jibDockerBuild -PdockerAccount=${{ secrets.DOCKERHUB_USERNAME }}
+      run: ./gradlew jib -PdockerAccount=${{ secrets.DOCKERHUB_USERNAME }}
 
