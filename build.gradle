@@ -52,3 +52,4 @@ tasks.named('test') {
 jar {
     enabled = false
 }
+//latest 테스트
