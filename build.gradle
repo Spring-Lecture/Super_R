@@ -40,7 +40,7 @@ jib {
         tags = ['latest']
     }
     container {
-        jvmFlags = ['-Xms512m', '-Xmx512m', '-Dspring.profiles.active=dev']
+        jvmFlags = ['-Xms512m', '-Xmx512m', '-Dspring.profiles.active=prod']
     }
 }
 
