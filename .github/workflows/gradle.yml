@@ -11,9 +11,13 @@ on:
   push:
     branches: [ "main" ]
 
+
+env: # 새로 추가한 부분
+  S3_BUCKET_NAME: steady-s
+  PROJECT_NAME: deploy
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -38,14 +42,9 @@ jobs:
       with:
         arguments: build
 
-    - name: Docker Login
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    - name: Build and Push Docker image with Jib
-      run: ./gradlew jib -PdockerAccount=${{ secrets.DOCKERHUB_USERNAME }}
+    - name: Make zip file
+      run: zip -r ./$GITHUB_SHA.zip .
+      shell: bash
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
@@ -54,11 +53,5 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_PRIVATE_ACCESS_KEY }}
         aws-region: ap-northeast-2
 
-    - name: Code Deploy To EC2 instance
-      run: |
-        aws deploy create-deployment \
-          --application-name team13-j \
-          --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --deployment-group-name team13-j \
-          --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
-
+    - name: Upload to S3
+      run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
