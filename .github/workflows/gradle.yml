@@ -40,3 +40,4 @@ jobs:
 
       - name: Build and Push Docker image with Jib
         run: ./gradlew jib
+
