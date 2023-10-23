@@ -37,6 +37,7 @@ jib {
     }
     to {
         image = "919777596980.dkr.ecr.ap-northeast-2.amazonaws.com/steady"
+        credHelper = 'ecr-login'
         tags = ['latest']
     }
     container {
