@@ -36,11 +36,11 @@ jib {
         image = 'openjdk:17-oracle'
     }
     to {
-        image = "${findProperty("dockerAccount")}"+"/steady"
+        image = "919777596980.dkr.ecr.ap-northeast-2.amazonaws.com/steady"
         tags = ['latest']
     }
     container {
-        jvmFlags = ['-Xms512m', '-Xmx512m', '-Dspring.profiles.active=prod']
+        jvmFlags = ['-Xms512m', '-Xmx512m', '-Dspring.profiles.active=dev']
     }
 }
 
@@ -52,4 +52,3 @@ tasks.named('test') {
 jar {
     enabled = false
 }
-//latest 테스/
