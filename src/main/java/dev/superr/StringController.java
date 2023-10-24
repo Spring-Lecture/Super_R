@@ -23,4 +23,9 @@ public class StringController {
         return hello+"22";
     }
 
+    @GetMapping("/")
+    public String getHello3() {
+        return "OK";
+    }
+
 }
