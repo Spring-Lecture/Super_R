@@ -4,3 +4,5 @@ spring:
 
 String:
   hello: "loc1al"
+server:
+  address: 0.0.0.0
