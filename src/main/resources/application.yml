@@ -3,4 +3,4 @@ spring:
     import: optional:classpath:/sub/
 
 String:
-  hello: "local"
+  hello: "loc1al"
