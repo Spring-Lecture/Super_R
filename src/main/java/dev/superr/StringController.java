@@ -23,7 +23,7 @@ public class StringController {
         return hello+"22";
     }
 
-    @GetMapping("/")
+    @GetMapping("/health")
     public String getHello3() {
         return "OK2";
     }
