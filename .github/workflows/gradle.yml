@@ -54,8 +54,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}  # AWS 접근 키 (GitHub Secrets에서 가져옴)
           aws_secret_key: ${{ secrets.AWS_PRIVATE_ACCESS_KEY }}  # AWS 비밀 키 (GitHub Secrets에서 가져옴)
-          application_name: test-a
-          environment_name: testa
+          application_name: ccs
+          environment_name: ccss
           version_label: github-action-${{ steps.current-time.outputs.formattedTime }}  # 배포 버전 라벨 설정
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip  # 배포할 패키지 경로

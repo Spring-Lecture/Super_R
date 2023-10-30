@@ -31,4 +31,10 @@ public class StringController {
         return "OK2";
     }
 
+    @GetMapping("/")
+    public String getHello4() {
+        log.info("health");
+        return "OK2";
+    }
+
 }
