@@ -1,0 +1,12 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+      "Name": "919777596980.dkr.ecr.ap-northeast-2.amazonaws.com/steay:latest",
+      "Update": "true"
+    },
+    "Ports": [
+      {
+        "ContainerPort": 8080
+      }
+    ]
+  }
