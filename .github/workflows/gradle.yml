@@ -41,22 +41,32 @@ jobs:
         run: echo "CurrentTime=$"  # 획득한 현재 시간 출력
         shell: bash
 
-      - name: Generate deployment package
-        run: |  # 배포 패키지 생성
-          mkdir -p deploy
-          cp build/libs/*.jar deploy/application.jar
-          cp Procfile deploy/Procfile
-          cp -r .ebextensions-dev deploy/.ebextensions
-          cd deploy && zip -r deploy.zip .
-
-      - name: Beanstalk Deploy
-        uses: einaregilsson/beanstalk-deploy@v20  # AWS Elastic Beanstalk에 배포
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}  # AWS 접근 키 (GitHub Secrets에서 가져옴)
-          aws_secret_key: ${{ secrets.AWS_PRIVATE_ACCESS_KEY }}  # AWS 비밀 키 (GitHub Secrets에서 가져옴)
-          application_name: ccs
-          environment_name: ccss
-          version_label: github-action-${{ steps.current-time.outputs.formattedTime }}  # 배포 버전 라벨 설정
-          region: ap-northeast-2
-          deployment_package: deploy/deploy.zip  # 배포할 패키지 경로
-          wait_for_environment_recovery: 180  # 배포 후 환경 복구 대기 시간
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_PRIVATE_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Build and Push Docker image with Jib
+        run: ./gradlew jib
+#
+#      - name: Generate deployment package
+#        run: |  # 배포 패키지 생성
+#          mkdir -p deploy
+#          cp build/libs/*.jar deploy/application.jar
+#          cp Procfile deploy/Procfile
+#          cp -r .ebextensions-dev deploy/.ebextensions
+#          cd deploy && zip -r deploy.zip .
+#
+#      - name: Beanstalk Deploy
+#        uses: einaregilsson/beanstalk-deploy@v20  # AWS Elastic Beanstalk에 배포
+#        with:
+#          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}  # AWS 접근 키 (GitHub Secrets에서 가져옴)
+#          aws_secret_key: ${{ secrets.AWS_PRIVATE_ACCESS_KEY }}  # AWS 비밀 키 (GitHub Secrets에서 가져옴)
+#          application_name: ccs
+#          environment_name: ccss
+#          version_label: github-action-${{ steps.current-time.outputs.formattedTime }}  # 배포 버전 라벨 설정
+#          region: ap-northeast-2
+#          deployment_package: deploy/deploy.zip  # 배포할 패키지 경로
+#          wait_for_environment_recovery: 180  # 배포 후 환경 복구 대기 시간

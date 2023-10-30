@@ -36,7 +36,7 @@ jib {
         image = 'openjdk:17-oracle'
     }
     to {
-        image = "919777596980.dkr.ecr.ap-northeast-2.amazonaws.com/steady"
+        image = "919777596980.dkr.ecr.ap-northeast-2.amazonaws.com/steay"
         credHelper = 'ecr-login'
         tags = ['latest']
     }
